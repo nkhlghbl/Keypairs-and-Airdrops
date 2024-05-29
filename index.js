@@ -35,8 +35,8 @@ const getWalletBalance = async () => {
 const airDropSol = async () => {
     try {
         // Request airdrop of 2 SOL to the wallet
-        console.log("Airdropping some SOL to the wallet!");
-        const fromAirDropSignature = await connection.requestAirdrop(new PublicKey(publicKey),
+        const fromAirDropSignature = await connection.requestAirdrop(
+            new PublicKey(userAccountAddress),
             2 * LAMPORTS_PER_SOL
         );
         await connection.confirmTransaction(fromAirDropSignature);
@@ -48,7 +48,7 @@ const airDropSol = async () => {
 // Show the wallet balance before and after airdropping SOL
 const mainFunction = async () => {
     await getWalletBalance();
-    await airDropSol();
+    await airDropSol(userAccountAddress);
     await getWalletBalance();
 }
 
